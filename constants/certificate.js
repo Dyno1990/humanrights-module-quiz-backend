@@ -1,0 +1,5 @@
+const CERTIFICATE_NAME = "ARYR-SG-MODULE-CERTIFICATE";
+
+module.exports = {
+  CERTIFICATE_NAME,
+};

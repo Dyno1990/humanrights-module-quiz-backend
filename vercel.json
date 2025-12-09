@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    { 
+      "src": "safeguarding-module-quiz-backend/api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { 
+      "src": "/api/(.*)",
+      "dest": "safeguarding-module-quiz-backend/api/$1.js"
+    }
+  ]
+}
