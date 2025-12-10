@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
 
-const CERTIFICATE_NAME = "ARYR-SG-MODULE-CERTIFICATE"; // Replace with your actual PDF template name (no extension)
+const CERTIFICATE_NAME = "HR-CERTIFICATE-RIGHTS-IN-MOTION"; // Replace with your actual PDF template name (no extension)
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {

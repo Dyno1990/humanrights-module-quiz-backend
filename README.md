@@ -20,3 +20,5 @@ npm run dev
 * Method check is add - triggered on POST only
 * Replaced static asset and body parser middleware - not neede for serverless setup
 * Moved all logic inside a function - requirement for serverless setup
+
+* Remove the vercel.json if it is there - that way Vercel will create the file with the routing automatically during the deployment.
