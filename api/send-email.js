@@ -44,8 +44,8 @@ module.exports = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: "Your Certificate",
-      text: "Attached is your personalized certificate.",
+      subject: "Your Human Rights Certificate",
+      text: "Attached is your personalized Human Rights certificate.",
       attachments: [
         {
           filename: "certificate.pdf",
