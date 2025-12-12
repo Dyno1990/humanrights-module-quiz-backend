@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
 const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
-const allowedOrigins = ["https://domain-one.vercel.app","https://domain-two.vercel.app"];
+const allowedOrigins = ["https://rights-in-motion.org","https://safeguarding-module-quiz.vercel.app"];
 
 const CERTIFICATE_NAME = "HR-CERTIFICATE-RIGHTS-IN-MOTION"; // Replace with your actual PDF template name (no extension)
 
