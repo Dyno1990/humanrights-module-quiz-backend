@@ -2,10 +2,27 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
 const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
+const allowedOrigins = ["https://domain-one.vercel.app","https://domain-two.vercel.app"];
 
 const CERTIFICATE_NAME = "HR-CERTIFICATE-RIGHTS-IN-MOTION"; // Replace with your actual PDF template name (no extension)
 
 module.exports = async (req, res) => {
+
+  const origin = req.headers.origin
+
+  // Added CORS headers
+  if (allowedOrigins.includes(origin)){
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  //Added OPTIONS handling
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
@@ -56,9 +73,9 @@ module.exports = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ success: true, message: "Email sent!" });
+    return res.status(200).json({ success: true, message: "Email sent!" });
   } catch (error) {
     console.error("Error sending email:", error);
-    res.status(500).json({ error: "Failed to send email." });
+    return res.status(500).json({ error: "Failed to send email." });
   }
 };
