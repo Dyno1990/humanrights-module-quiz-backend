@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
-const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
+const { PDFDocument, rgb, /* StandardFonts */ } = require("pdf-lib");
 const allowedOrigins = ["https://rights-in-motion.org","https://safeguarding-module-quiz.vercel.app"];
 
 const CERTIFICATE_NAME = "HR-CERTIFICATE-RIGHTS-IN-MOTION"; // Replace with your actual PDF template name (no extension)
@@ -34,17 +34,31 @@ module.exports = async (req, res) => {
 
   try {
     const pdfTemplatePath = path.join(__dirname, `assets/${CERTIFICATE_NAME}.pdf`);
+
+    // Load Roboto Bold (supports Cyrillic)
+    const fontPath = path.join(__dirname, "assets", "Roboto-Bold.ttf");
+    const fontBytes = fs.readFileSync(fontPath);
+
     const existingPdfBytes = fs.readFileSync(pdfTemplatePath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
+
+    /*
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    */
+
+    // === Embed the custom Cyrillic font ===
+    const robotoFont = await pdfDoc.embedFont(fontBytes, { subset: true });
 
     firstPage.drawText(name, {
       x: 150,
       y: 280,
       size: 24,
+      /*
       font: helveticaFont,
+      */
+      font: robotoFont,
       color: rgb(0, 0, 0),
     });
 
