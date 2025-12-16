@@ -22,3 +22,7 @@ npm run dev
 * Moved all logic inside a function - requirement for serverless setup
 
 * Remove the vercel.json if it is there - that way Vercel will create the file with the routing automatically during the deployment.
+
+### Custom fonts supporting Cyrillic
+
+* added dependency for FontKit in order to work with custom fonts supporting Cyrillic letters

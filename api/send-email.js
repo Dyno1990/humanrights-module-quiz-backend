@@ -57,8 +57,8 @@ module.exports = async (req, res) => {
     const robotoFont = await pdfDoc.embedFont(fontBytes, { subset: true });
 
     firstPage.drawText(name, {
-      x: 300,
-      y: 350,
+      x: 350,
+      y: 180,
       size: 24,
       /*
       font: helveticaFont,
