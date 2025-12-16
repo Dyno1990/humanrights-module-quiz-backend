@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
 
     firstPage.drawText(name, {
       x: 350,
-      y: 230,
+      y: 240,
       size: 24,
       /*
       font: helveticaFont,
