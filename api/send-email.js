@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
 const { PDFDocument, rgb, /* StandardFonts */ } = require("pdf-lib");
+const fontkit = require("@pdf-lib/fontkit");
 const allowedOrigins = ["https://rights-in-motion.org","https://safeguarding-module-quiz.vercel.app"];
 
 const CERTIFICATE_NAME = "HR-CERTIFICATE-RIGHTS-IN-MOTION"; // Replace with your actual PDF template name (no extension)
@@ -41,6 +42,10 @@ module.exports = async (req, res) => {
 
     const existingPdfBytes = fs.readFileSync(pdfTemplatePath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+  // регистрираме fontkit, за да може да embed-ваме TTF шрифтове (Roboto)
+    pdfDoc.registerFontkit(fontkit);
+
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
 
@@ -52,8 +57,8 @@ module.exports = async (req, res) => {
     const robotoFont = await pdfDoc.embedFont(fontBytes, { subset: true });
 
     firstPage.drawText(name, {
-      x: 150,
-      y: 280,
+      x: 300,
+      y: 350,
       size: 24,
       /*
       font: helveticaFont,
